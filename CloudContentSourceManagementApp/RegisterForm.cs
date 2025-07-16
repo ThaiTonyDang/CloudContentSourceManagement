@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CloudContentSourceManagementApp.CommonHelper;
+using CloudContentSourceManagementApp.Models;
+using CloudContentSourceManagementApp.Services;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,7 +18,7 @@ namespace CloudContentSourceManagementApp
         {
             InitializeComponent();
             this.Text = "Đăng ký tài khoản mới";
-            this.Size = new Size(430, 470);
+            this.Size = new Size(430, 520);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -81,7 +84,7 @@ namespace CloudContentSourceManagementApp
             btnRegister = new Button
             {
                 Text = "Đăng ký",
-                Location = new Point(45, 370),
+                Location = new Point(45, 390),
                 Width = 320,
                 Height = 40,
                 BackColor = Color.FromArgb(24, 119, 242),
@@ -100,7 +103,7 @@ namespace CloudContentSourceManagementApp
             btnLogin = new Button
             {
                 Text = "Quay lại đăng nhập",
-                Location = new Point(45, 420),
+                Location = new Point(45, 440),
                 Width = 320,
                 Height = 30,
                 Font = new Font("Segoe UI", 10),
