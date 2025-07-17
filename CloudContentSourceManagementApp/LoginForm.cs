@@ -20,6 +20,7 @@ namespace CloudContentSourceManagementApp
 
         public LoginForm()
         {
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             this.Text = "Đăng nhập";
             this.Size = new Size(430, 470);

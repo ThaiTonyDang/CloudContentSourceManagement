@@ -17,6 +17,7 @@ namespace CloudContentSourceManagementApp
         public RegisterForm()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             this.Text = "Đăng ký tài khoản mới";
             this.Size = new Size(430, 520);
             this.StartPosition = FormStartPosition.CenterScreen;

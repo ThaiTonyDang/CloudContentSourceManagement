@@ -34,6 +34,7 @@ namespace CloudContentSourceManagementApp
         public MainForm()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             // TabControl (nếu không dùng Designer thì code tay như dưới)
             InitializeComponent();
 
@@ -288,29 +289,7 @@ namespace CloudContentSourceManagementApp
             // Tạo form Job monitor và Tab Job Monitor , trong Tb này gồm Tab Process và Tab Quue
             // Tạo job worker để xử lý viêc Scan
             var profile = GoogleAppProfileService.GetGoogleAppProfilesByTenantId(LogonSystem.TenantId)[0];
-            string fixedPrivateKey = profile.PrivateKey.Replace("\\n", "\n").Replace("\n", Environment.NewLine);
-            var googleCredential = new
-            {
-                type = "service_account",
-                project_id = "opus-nicholas-project",
-                private_key_id = "0123456789abcdef",
-                private_key = fixedPrivateKey,
-                client_email = profile.ClientEmail,
-                client_id = profile.ClientId,
-                auth_uri = "https://accounts.google.com/o/oauth2/auth",
-                token_uri = "https://oauth2.googleapis.com/token",
-                auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs",
-                client_x509_cert_url = $"https://www.googleapis.com/robot/v1/metadata/x509/{profile.ClientEmail}"
-            };
-            var json = JsonSerializer.Serialize(googleCredential, new JsonSerializerOptions { WriteIndented = true });
-            var credential = GoogleCredential.FromJson(json).CreateScoped(DriveService.Scope.Drive).CreateWithUser(profile.UserEmail);
-            var service = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = profile.ProfileName
-            });
-
-            var drives = await GetSharedDrivesByNameAsync(service, txtFilterValue.Text);
+            var service = new GoogleDriveService(profile);
         }
 
         public async Task<List<Drive>> GetSharedDrivesByNameAsync(DriveService service, string keyword)
