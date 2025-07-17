@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CloudContentSourceManagementApp
 {
@@ -21,6 +22,7 @@ namespace CloudContentSourceManagementApp
 
         public CreateAppProfileForm()
         {
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             this.Text = "Tạo Google App Profile";
             this.Size = new Size(500, 550);
             this.StartPosition = FormStartPosition.CenterParent;
@@ -115,6 +117,8 @@ namespace CloudContentSourceManagementApp
                 return;
             }
 
+            string fixedPrivateKey = txtPrivateKey.Text.Replace("\\n", "\n").Replace("\n", Environment.NewLine);
+            string encryptedKey = PasswordHelper.Encrypt(fixedPrivateKey.Trim());
             // Map dữ liệu
             CreatedProfile = new GoogleAppProfile
             {
@@ -122,9 +126,9 @@ namespace CloudContentSourceManagementApp
                 UserEmail = txtUserEmail.Text.Trim(),
                 ClientId = txtClientId.Text.Trim(),
                 ClientEmail = txtClientEmail.Text.Trim(),
-                PrivateKey = txtPrivateKey.Text.Trim(),
+                PrivateKey = encryptedKey.Trim(),
                 TenantId = LogonSystem.TenantId,
-                CreatedTime = DateTime.Now.Ticks
+                CreatedTime = DateTime.Now.Ticks,
             };
 
             // Lưu vào DB
