@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CloudContentSourceManagementApp.Services
 {
-    public static class UserService
+    public static class UserAccountService
     {
         // Kiểm tra tên đăng nhập đã tồn tại chưa
         public static bool UsernameExists(string username)

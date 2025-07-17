@@ -3,7 +3,8 @@
     internal static class Program
     {
         public static readonly string AppFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CloudContentSourceManagementApp");
-        public static readonly string DbFile = Path.Combine(AppFolder, "users.db");
+        public static readonly string DbUser = Path.Combine(AppFolder, "users.db");
+        public static readonly string DbAppProfile = Path.Combine(AppFolder, "AppProfile.db");
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

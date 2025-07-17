@@ -177,7 +177,7 @@ namespace CloudContentSourceManagementApp
             lblError.Text = "";
             var user = txtUser.Text.Trim();
             var pass = txtPass.Text.Trim();
-            var account = UserService.GetUserByUsername(user);
+            var account = UserAccountService.GetUserByUsername(user);
 
             if (account == null || !PasswordHelper.VerifyPassword(pass, account.PasswordHash))
             {
@@ -191,15 +191,28 @@ namespace CloudContentSourceManagementApp
             SaveRememberedUser();
 
             // Đăng nhập thành công – mở MainForm
-            MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // new MainForm().Show();
             // this.Hide();
+            var result = MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (result == DialogResult.OK)
+            {
+                var mainForm = new MainForm();
+                mainForm.FormClosed += (s, args) => Application.Exit(); // Khi mainform tắt thì app tắt
+                mainForm.Show();
+                this.Hide();
+            }
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
             new RegisterForm().Show();
             this.Hide();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Application.Exit(); // Đảm bảo app tắt hẳn, không bị ẩn dưới khay
         }
     }
 }
