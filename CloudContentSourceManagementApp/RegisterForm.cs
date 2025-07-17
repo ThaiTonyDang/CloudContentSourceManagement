@@ -149,7 +149,7 @@ namespace CloudContentSourceManagementApp
                 lblError.Text = "Mật khẩu nhập lại không khớp!";
                 return;
             }
-            if (UserService.UsernameExists(txtUser.Text.Trim()))
+            if (UserAccountService.UsernameExists(txtUser.Text.Trim()))
             {
                 lblError.Text = "Tên đăng nhập đã tồn tại!";
                 return;
@@ -160,9 +160,9 @@ namespace CloudContentSourceManagementApp
                 Username = txtUser.Text.Trim(),
                 PasswordHash = PasswordHelper.HashPassword(txtPass.Text.Trim()),
                 TenantId = Guid.NewGuid().ToString("N"),
-                CreatedAt = DateTime.Now
+                CreatedTime = DateTime.Now.Ticks
             };
-            UserService.AddUser(account);
+            UserAccountService.AddUser(account);
 
             MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             new LoginForm().Show();

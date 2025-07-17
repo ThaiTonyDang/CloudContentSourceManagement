@@ -12,6 +12,6 @@ namespace CloudContentSourceManagementApp.Models
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string TenantId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public long CreatedTime { get; set; }
     }
 }
